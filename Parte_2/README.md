@@ -2,12 +2,6 @@
 
 Este repositório contém um programa em assembly para a arquitetura MIPS que implementa o método da bisseção para encontrar a raiz positiva da equação f(x) = x^3 - 10. O programa utiliza operações com ponto flutuante para realizar os cálculos necessários.
 
-## Detalhes da disciplina 📚
-
-- Disciplina: DCA0104 – Arquitetura de Computadores
-- Turmas: 01 (35T34) e 02 (46M34), 2023.1
-- Professor: Diogo Pinheiro Fernandes Pedrosa
-
 ## Contextualização e Problema 🧐
 
 Em diversos problemas de ciências e engenharia, é necessário encontrar as raízes de uma equação. Para isso, o método da bisseção é frequentemente utilizado. Neste problema específico, deseja-se encontrar a raiz positiva da equação f(x) = x^3 - 10.

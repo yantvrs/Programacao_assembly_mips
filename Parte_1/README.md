@@ -1,8 +1,8 @@
-## MIPS Assembly - Cálculo do Histograma
+## MIPS Assembly - Cálculo do Histograma :bar_chart:
 
 O código apresentado é um programa em linguagem assembly MIPS que realiza o cálculo do histograma de um vetor de amostras. O objetivo é contar o número de ocorrências de cada intensidade presente no vetor e armazenar essas contagens em um vetor de saída.
 
-### Funcionamento
+### Funcionamento :gear:
 
 O programa inicia declarando os vetores `V` e `H` na seção de dados. O vetor `V` contém as amostras de intensidade, e o vetor `H` será utilizado para armazenar o histograma.
 
@@ -22,8 +22,8 @@ Em seguida, o programa entra em um novo loop para exibir os elementos obtidos no
 
 Por fim, a syscall é usada para encerrar o programa.
 
-### Uso
+### Uso :computer:
 
-Para utilizar o programa, você precisa montá-lo e executá-lo em um simulador MIPS, como MARS ou QtSPIM. Certifique-se de fornecer o vetor `V` inicializado com as amostras desejadas e ajust
+Para utilizar o programa, você precisa montá-lo e executá-lo em um simulador MIPS, como MARS ou QtSPIM. Certifique-se de fornecer o vetor `V` inicializado com as
 
-ar o número total de elementos (`$t0`) e o número máximo de intensidades (`$t1`) de acordo com o seu contexto.
+ amostras desejadas e ajustar o número total de elementos (`$t0`) e o número máximo de intensidades (`$t1`) de acordo com o seu contexto.

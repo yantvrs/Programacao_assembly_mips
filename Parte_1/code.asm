@@ -1,4 +1,4 @@
-# Identificação: [insira sua identificação aqui]
+# Identificação: [Vínicius Yan Tavares Nascimento]
 
 .data
 V: .word 9, 5, 7, 5, 3, 4, 0, 2, 6, 4, 2, 5, 4, 1, 2, 1, 6, 2, 2, 3, 6, 3, 0, 0, 7, 8, 3, 4, 5, 4, 0, 5, 2, 9, 8, 7

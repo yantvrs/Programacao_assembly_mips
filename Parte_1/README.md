@@ -27,7 +27,3 @@ Por fim, a syscall é usada para encerrar o programa.
 Para utilizar o programa, você precisa montá-lo e executá-lo em um simulador MIPS, como MARS ou QtSPIM. Certifique-se de fornecer o vetor `V` inicializado com as amostras desejadas e ajust
 
 ar o número total de elementos (`$t0`) e o número máximo de intensidades (`$t1`) de acordo com o seu contexto.
-
-### Autor
-
-[Seu nome completo e matrícula]

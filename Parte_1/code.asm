@@ -1,52 +1,48 @@
-# Identificação: [Vínicius Yan Tavares Nascimento]
-
 .data
 V: .word 9, 5, 7, 5, 3, 4, 0, 2, 6, 4, 2, 5, 4, 1, 2, 1, 6, 2, 2, 3, 6, 3, 0, 0, 7, 8, 3, 4, 5, 4, 0, 5, 2, 9, 8, 7
-H: .word 0:10
+H: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
 .text
 .globl main
 
 main:
-    li $t0, 36          # Número total de elementos no vetor V
-    li $t1, 10          # Número máximo de intensidades (0 a 9)
-    la $s0, V           # Endereço base do vetor V
-    la $s1, H           # Endereço base do vetor H
+    # Calcula o tamanho do vetor V
+    la $t0, V
+    la $t1, H
+    lw $t2, 0($t0)  # Carrega o primeiro elemento de V
 
-    # Inicializa o vetor H com zeros
-    li $t2, 0
-    li $t3, 0
-init_loop:
-    sw $t2, ($s1)
-    addiu $s1, $s1, 4
-    addiu $t3, $t3, 1
-    bne $t3, $t1, init_loop
+count_loop:
+    beq $t2, $zero, end_count  # Verifica se o elemento é zero
+    sll $t3, $t2, 2  # Multiplica o valor por 4 para obter o offset de H
+    add $t3, $t3, $t1  # Calcula o endereço de H[num]
+    lw $t4, 0($t3)  # Carrega o valor atual de H[num]
+    addiu $t4, $t4, 1  # Incrementa o valor de H[num]
+    sw $t4, 0($t3)  # Armazena o novo valor de H[num]
 
-    # Calcula o histograma
-    move $s1, $s0      # Reinicia o endereço base do vetor V
-calc_loop:
-    lw $t2, ($s1)      # Carrega o valor atual de V[i]
-    add $t3, $t2, $t1  # Calcula o deslocamento para o índice de H
-    sll $t3, $t3, 2    # Multiplica por 4 para converter em bytes (cada elemento de H é um word)
-    add $t3, $t3, $s1  # Adiciona o deslocamento ao endereço base do vetor H
-    lw $t4, ($t3)      # Carrega o valor atual de H[V[i]]
-    addiu $t4, $t4, 1  # Incrementa o valor
-    sw $t4, ($t3)      # Armazena o novo valor em H[V[i]]
+end_count:
+    addiu $t0, $t0, 4  # Avança para o próximo elemento de V
+    lw $t2, 0($t0)  # Carrega o próximo elemento de V
+    bnez $t2, count_loop  # Loop enquanto não for o final de V
 
-    addiu $s1, $s1, 4  # Incrementa o endereço de V
-    addiu $t0, $t0, -1 # Decrementa o contador
-    bnez $t0, calc_loop
+    # Exibe os elementos do vetor H
+    la $t0, H
+    li $v0, 1  # Código de syscall para imprimir inteiro
+    li $t1, 0  # Índice inicial do vetor H
 
-    # Exibe os elementos obtidos no vetor H
-    la $s1, H
-    li $v0, 4          # Código da syscall para imprimir string
 print_loop:
-    lw $a0, ($s1)
-    li $v0, 1          # Código da syscall para imprimir inteiro
+    lw $a0, 0($t0)  # Carrega o elemento atual de H para ser impresso
     syscall
-    addiu $s1, $s1, 4
-    addiu $t0, $t0, -1
-    bnez $t0, print_loop
+    addiu $t0, $t0, 4  # Avança para o próximo elemento de H
+    addiu $t1, $t1, 1  # Incrementa o índice
+    blez $a0, end_print  # Verifica se chegou ao final de H
+    li $v0, 4  # Código de syscall para imprimir string
+    la $a0, space  # Imprime um espaço entre os elementos
+    syscall
+    j print_loop
 
-    li $v0, 10         # Código da syscall para encerrar o programa
+end_print:
+    li $v0, 10  # Código de syscall para sair do programa
     syscall
+
+.data
+space: .asciiz " "

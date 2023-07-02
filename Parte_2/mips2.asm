@@ -36,7 +36,6 @@ main:
   li $v0, 10
   syscall
 
-# Função de bissecção
 bisection:
   bisection_loop:
     add $t1, $t1, 1        # Incrementa o contador de iterações
@@ -106,7 +105,6 @@ exit_program:
   li $v0, 10                              # Carrega o código da syscall para encerrar o programa para $v0
   syscall                                 # Encerra o programa
 
-# Função 'f'
 f:
   addi $sp, $sp, -8       # Cria espaço na pilha
   swc1 $f2, 0($sp)        # Salva o valor de $f2 na pilha

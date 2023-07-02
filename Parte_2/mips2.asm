@@ -10,7 +10,7 @@
   # Mostra as mensagens no console
   root_not_found_message: .asciiz "Raiz não encontrada!"
   root_found_message: .asciiz "Raiz: "
-  performed_iterations_message: .asciiz "\nNúmero de iterações: "
+  performed_iterations_message: .asciiz "\nQuantidade de interações: "
   
   # Define o máximo de 10 iterações
   max_iterations: .word 10

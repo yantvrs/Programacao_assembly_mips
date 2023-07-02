@@ -1,17 +1,21 @@
+# Atividade assembly mips 2
+# Discente : Vinícius Yan Tavares Nascimento
+# Matrícula : 20200069226
+
 .data
-  # Definimos o intervalo que será utilizado
+  # Define o intervalo que será utilizado no loop
   interval_start: .float 2.0
   interval_end: .float 3.0
   
-  # Mostramos as mensagens no console
-  root_not_found_message: .asciiz "Nenhuma raiz foi encontrada!"
+  # Mostra as mensagens no console
+  root_not_found_message: .asciiz "Raiz não encontrada!"
   root_found_message: .asciiz "Raiz: "
   performed_iterations_message: .asciiz "\nNúmero de iterações: "
   
-  # Definimos o máximo de 10 iterações
+  # Define o máximo de 10 iterações
   max_iterations: .word 10
   
-  # Definimos a tolerância de 0.1
+  # Define a tolerância de 0.1
   tolerance: .float 0.1
 
 .text
@@ -26,15 +30,15 @@ main:
   lwc1 $f5, tolerance      # Carrega o valor da tolerância para $f5
 
   # Chama a função 'bisecao'
-  jal bisecao
+  jal bisection
 
   # Fim do programa
   li $v0, 10
   syscall
 
 # Função de bissecção
-bisecao:
-  bisecao_loop:
+bisection:
+  bisection_loop:
     add $t1, $t1, 1        # Incrementa o contador de iterações
     sub.s $f6, $f4, $f3    # Calcula o intervalo (fim - início) e armazena em $f6
     li $t2, 2              # Carrega o valor 2 para $t2
@@ -46,12 +50,12 @@ bisecao:
     mtc1 $zero, $f7        # Move 0 para $f7
     cvt.s.w $f7, $f7       # Converte 0 para ponto flutuante
     c.eq.s $f0, $f7        # Compara o resultado de 'f' com 0
-    bc1f check_tol         # Se não for igual a 0, vai para 'check_tol'
-    j bisecao_loop         # Se for igual a 0, volta para 'bisecao_loop'
+    bc1f check_tolerance         # Se não for igual a 0, vai para 'check_tol'
+    j bisection_loop         # Se for igual a 0, volta para 'bisecao_loop'
 
-check_tol:
+check_tolerance:
   c.lt.s $f6, $f5          # Compara o intervalo com a tolerância
-  bc1t convergencia        # Se for menor, vai para 'convergencia'
+  bc1t convergence        # Se for menor, vai para 'convergencia'
 
   mul.s $f6, $f2, $f0      # Multiplica f(início) e f(ponto médio) e armazena em $f6
   c.lt.s $f7, $f6          # Compara 0 com o resultado da multiplicação
@@ -60,14 +64,14 @@ check_tol:
 
   movf.s $f4, $f1          # Move o novo ponto médio para $f4
 
-  bne $t0, $t1, bisecao_loop  # Se o número máximo de iterações não foi atingido, volta para 'bisecao_loop'
+  bne $t0, $t1, bisection_loop  # Se o número máximo de iterações não foi atingido, volta para 'bisecao_loop'
 
   la $a0, root_not_found_message  # Carrega o endereço da mensagem 'root_not_found' para $a0
   li $v0, 4               # Carrega o código da syscall para imprimir string para $v0
   syscall                 # Imprime a mensagem
   j exit_program          # Vai para o fim do programa
 
-convergencia:
+convergence:
   jal print_root_found_message             # Chama a função para imprimir a mensagem de raiz encontrada
   jal print_root_value                     # Chama a função para imprimir o valor da raiz
   jal print_performed_iterations_message   # Chama a função para imprimir a mensagem de número de iterações

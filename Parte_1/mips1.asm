@@ -11,16 +11,17 @@ histogram: .space 50 # Declara a variável "histogram" como uma área de espaço
 # ".asciliz" declara uma sequência de caracteres na memória 
 new_line: .asciiz "\n"	# Nova linha
 comma: .asciiz ","	# Vírgula
+prompt: .asciiz "H ["
+closing_bracket: .asciiz "]"
 
-
-.text	# Declara início da seção de códigos do programa
+.text
 .globl main
 
 main:
     li $s0, 0          	# Inicializa o registrador $s0 (contador do loop) com o valor 0
     la $s1, histogram	# Carrega o endereço da variável "histogram" para o registrador $s1
     li $s2, 36        	# Inicializa o registrador $s2 com o valor 36 (tamanho do sinal)
-    la $s3, vector     # Carrega o endereço da variável "vector" para o registrador $s3
+    la $s3, vector    	# Carrega o endereço da variável "vector" para o registrador $s3
 
 histogramFunc:
     lw $s4, ($s3)     			# Carrega o valor do sinal para o registrador $s4
@@ -35,6 +36,10 @@ histogramFunc:
     li $s0, 0         			# Reinicia o contador do loop com o valor 0
     li $s2, 10       			# Define o número de elementos a serem mostrados
 
+    # Adiciona o cabeçalho "H [" antes de mostrar os elementos
+    li $v0, 4         		# Carrega o código da syscall para impressão de uma string para o registrador $v0
+    la $a0, prompt     		# Carrega o endereço do cabeçalho para o registrador $a0
+    syscall           		# Chama a syscall para imprimir o cabeçalho
 
 show:
     li $v0, 1         		# Carrega o código da syscall para impressão de um inteiro para o registrador $v0
@@ -48,10 +53,13 @@ show:
     syscall           		# Chama a syscall para imprimir a vírgula
     j show         		# Salta para o início do loop em "show"
 
-
 show_line:
-    li $v0, 4         # Carrega o código da syscall para impressão de uma string para o registrador $v0
-    la $a0, new_line  # Carrega o endereço da nova linha para o registrador $a0
-    syscall           # Chama a syscall para imprimir a nova linha
-    li $v0, 10        # Carrega o código da syscall para finalizar o programa para o registrador $v0
-    syscall           # Chama a syscall para finalizar o programa
+    # Adiciona o fechamento "]"
+    li $v0, 4         	       	# Carrega o código da syscall para impressão de uma string para o registrador $v0
+    la $a0, closing_bracket  	# Carrega o endereço do fechamento para o registrador $a0
+    syscall           		# Chama a syscall para imprimir o fechamento
+    li $v0, 4         		# Carrega o código da syscall para impressão de uma string para o registrador $v0
+    la $a0, new_line  		# Carrega o endereço da nova linha para o registrador $a0
+    syscall           		# Chama a syscall para imprimir a nova linha
+    li $v0, 10        		# Carrega o código da syscall para finalizar o programa para o registrador $v0
+    syscall           		# Chama a syscall para finalizar o programa

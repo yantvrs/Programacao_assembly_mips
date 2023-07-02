@@ -63,3 +63,5 @@ show_line:
     syscall           		# Chama a syscall para imprimir a nova linha
     li $v0, 10        		# Carrega o código da syscall para finalizar o programa para o registrador $v0
     syscall           		# Chama a syscall para finalizar o programa
+    
+.data

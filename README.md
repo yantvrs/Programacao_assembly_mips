@@ -1,31 +1,34 @@
-# 📚 Descrição do Repositório
+# 📚 Repository Description
 
-Este repositório contém dois projetos relacionados à disciplina de Arquitetura de Computadores (DCA0104) ministrada pelo professor Diogo Pinheiro Fernandes Pedrosa. Os projetos são divididos em duas partes:
+This repository contains two projects related to the Computer Architecture course (DCA0104) taught by Professor Diogo Pinheiro Fernandes Pedrosa. The projects are divided into two parts:
 
-## Parte 1: Conjunto de Instruções da Arquitetura MIPS (operações com valores inteiros)
+## Part 1: MIPS Architecture Instruction Set (integer value operations)
 
-O primeiro projeto aborda a implementação de um programa em assembly para a arquitetura MIPS. O objetivo é calcular o histograma de um vetor de amostras de sinal, representando a contagem de ocorrências de cada intensidade presente no vetor.
+The first project deals with the implementation of an assembly program for the MIPS architecture. The goal is to calculate the histogram of a signal sample vector, representing the count of occurrences of each intensity present in the vector.
 
-O programa utiliza operações com valores inteiros e segue o seguinte algoritmo:
+The program uses integer value operations and follows the following algorithm:
 
-1. Declaração de variáveis e constantes: Lmax (número máximo de intensidades) e TAM (tamanho do vetor).
-2. Inicialização do vetor H: define todos os elementos como zero.
-3. Cálculo do histograma: percorre o vetor de amostras e incrementa o valor correspondente no vetor H.
-4. Exibição do vetor H utilizando chamada de sistema (syscall).
+1. Declaration of variables and constants: Lmax (maximum number of intensities) and TAM (vector size).
+2. Initialization of the H vector: sets all elements to zero.
+3. Calculation of the histogram: iterates through the sample vector and increments the corresponding value in the H vector.
+4. Displaying the H vector using a system call (syscall).
 
-O programa deve ser testado em um simulador MIPS, como MARS ou QtSPIM.
+The program should be tested on a MIPS simulator such as MARS or QtSPIM.
 
-## Parte 2: Programação Assembly para Arquitetura MIPS (operações com ponto flutuante)
+## Part 2: MIPS Assembly Programming (floating-point operations)
 
-O segundo projeto aborda a aplicação do método da bisseção para encontrar a raiz positiva de uma equação. O programa em assembly para a arquitetura MIPS implementa esse método e realiza o cálculo da raiz aproximada.
+The second project involves the application of the bisection method to find the positive root of an equation. The MIPS assembly program implements this method and calculates the approximate root.
 
-O método da bisseção consiste em reduzir gradativamente um intervalo [a, b], até uma determinada tolerância, e testar o valor intermediário para verificar se ele está próximo da raiz desejada.
+The bisection method involves gradually reducing an interval [a, b] until a specified tolerance and testing the intermediate value to see if it is close to the desired root.
 
-O programa segue o algoritmo do método da bisseção e recebe como entrada os seguintes parâmetros: pontos extremos a e b, tolerância TOL, número máximo de iterações N.
+The program follows the algorithm of the bisection method and takes the following parameters as input: endpoints a and b, tolerance TOL, maximum number of iterations N.
 
-A saída do programa exibirá a solução aproximada p ou a mensagem "Raiz não encontrada!" caso a solução não seja encontrada dentro do número máximo de iterações.
+The program's output will display the approximate solution p or the message "Root not found!" if the solution is not found within the maximum number of iterations.
 
-Neste projeto, a equação utilizada é f(x) = x^3 - 10, a raiz positiva deve ser encontrada com uma tolerância de 0,1, máximo de 10 iterações e intervalo de busca igual a [2.0, 3.0].
+In this project, the equation used is f(x) = x^3 - 10, and the positive root should be found with a tolerance of 0.1, a maximum of 10 iterations, and a search interval of [2.0, 3.0].
 
-O programa também deve ser testado em um simulador MIPS, como MARS ou QtSPIM.
+The program should also be tested on a MIPS simulator such as MARS or QtSPIM.
 
+## License
+
+This repository is licensed under the [MIT License](LICENSE).
